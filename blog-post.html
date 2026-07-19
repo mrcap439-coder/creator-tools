@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post - Creator Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .blog-post { padding-top: 100px; padding-bottom: 80px; }
+    .blog-post__header { text-align: center; max-width: 780px; margin: 0 auto 48px; }
+    .blog-post__badge { display: inline-block; padding: 6px 18px; background: var(--accent-gradient); color: white; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 20px; }
+    .blog-post__title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; font-family: 'Outfit', sans-serif; line-height: 1.2; margin-bottom: 20px; color: var(--text-primary); }
+    .blog-post__meta { display: flex; justify-content: center; gap: 20px; color: var(--text-muted); font-size: 0.9rem; flex-wrap: wrap; }
+    .blog-post__cover { max-width: 780px; margin: 0 auto 40px; border-radius: 20px; overflow: hidden; height: 350px; display: flex; align-items: center; justify-content: center; font-size: 6rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .blog-post__body { max-width: 780px; margin: 0 auto; color: var(--text-primary); font-size: 1.05rem; line-height: 1.9; }
+    .blog-post__body h2 { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 700; margin: 36px 0 16px; color: var(--text-primary); }
+    .blog-post__body h3 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 600; margin: 28px 0 12px; color: var(--text-primary); }
+    .blog-post__body p { margin-bottom: 20px; color: var(--text-secondary); }
+    .blog-post__body ul, .blog-post__body ol { margin: 16px 0 24px 24px; color: var(--text-secondary); }
+    .blog-post__body li { margin-bottom: 10px; line-height: 1.7; }
+    .blog-post__body strong { color: var(--text-primary); }
+    .blog-post__share { max-width: 780px; margin: 48px auto; padding: 24px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .blog-post__share-title { font-weight: 600; font-family: 'Outfit', sans-serif; color: var(--text-primary); }
+    .blog-post__share-btns { display: flex; gap: 10px; }
+    .blog-post__share-btn { padding: 8px 18px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer; transition: all 0.3s; font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .blog-post__share-btn:hover { border-color: var(--accent-1); color: var(--accent-1); }
+    
+    .related-posts { max-width: 1000px; margin: 60px auto 0; padding-top: 60px; border-top: 1px solid var(--border-color); }
+    .related-posts h3 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 30px; text-align: center; color: var(--text-primary); }
+    .blog-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; transition: all 0.3s; }
+    .blog-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(13,148,136,0.1); border-color: rgba(13,148,136,0.3); }
+    .blog-card__image { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .blog-card__icon { font-size: 3.5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+    .blog-card__category { position: absolute; top: 12px; left: 12px; padding: 4px 14px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 50px; color: white; font-size: 0.75rem; font-weight: 600; }
+    .blog-card__content { padding: 20px; }
+    .blog-card__meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
+    .blog-card__title { font-size: 1.1rem; font-weight: 600; font-family: 'Outfit', sans-serif; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; }
+    .blog-card__link { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-1); font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: gap 0.3s; }
+    .blog-card__link:hover { gap: 10px; }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container container">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>
+        <span><span class="gradient-text">Creator</span> Tools</span>
+      </a>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">All Tools</a></li>
+        <li><a href="#">Free Tools</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+      </ul>
+      <div class="navbar__right">
+        <button class="navbar__theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+        <a href="login.html" class="navbar__cta">Login</a>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container blog-post">
+    <div class="breadcrumb" style="max-width: 780px; margin: 0 auto 30px;">
+      <a href="index.html">Home</a> / <a href="blog.html">Blog</a> / <span id="breadcrumbTitle">Loading...</span>
+    </div>
+
+    <article id="postContainer">
+      <header class="blog-post__header">
+        <span class="blog-post__badge" id="postCategory">Category</span>
+        <h1 class="blog-post__title" id="postTitle">Loading...</h1>
+        <div class="blog-post__meta">
+          <span id="postDate">📅 ...</span>
+          <span id="postReadTime">⏱️ ...</span>
+          <span id="postAuthor">✍️ ...</span>
+        </div>
+      </header>
+
+      <div class="blog-post__cover" id="postCover" style="background: #eee;">
+        <span id="postIcon">⏳</span>
+      </div>
+
+      <div class="blog-post__body" id="postContent">
+        <p>Loading content...</p>
+      </div>
+
+      <div class="blog-post__share">
+        <span class="blog-post__share-title">Share this article:</span>
+        <div class="blog-post__share-btns">
+          <a href="#" class="blog-post__share-btn" onclick="alert('Shared to Twitter!'); return false;">Twitter</a>
+          <a href="#" class="blog-post__share-btn" onclick="alert('Shared to Facebook!'); return false;">Facebook</a>
+          <a href="#" class="blog-post__share-btn" onclick="alert('Copied link!'); return false;">Copy Link</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="related-posts">
+      <h3>Read Next</h3>
+      <div class="blog-grid" id="relatedPostsGrid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="text-align: center; padding: 40px 0;">
+      <p>&copy; 2026 Creator Tools. All rights reserved.</p>
+      <div style="margin-top: 20px; display: flex; justify-content: center; gap: 16px;">
+        <a href="https://www.facebook.com/share/18v67h63hg/" target="_blank" style="color: var(--text-secondary);">Facebook</a>
+        <a href="https://wa.me/923126575447" target="_blank" style="color: var(--text-secondary);">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923126575447" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp" style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 100;">
+    📱
+  </a>
+
+  <script src="script.js"></script>
+  <script>
+    const blogData = {
+      'chatgpt-guide': {
+        title: 'Complete Guide: How to Use ChatGPT Plus Like a Pro',
+        category: 'Guides',
+        date: 'July 15, 2026',
+        readTime: '8 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #10a37f, #1a7f64)',
+        icon: '🤖',
+        content: `<p>ChatGPT Plus is one of the most powerful AI assistants available today. With GPT-4o, DALL·E, Advanced Data Analysis, and custom GPTs, it offers incredible value for professionals, students, and content creators.</p>
+        <h2>What You Get with ChatGPT Plus</h2>
+        <ul><li><strong>GPT-4o Access</strong> — The most capable language model with faster responses</li><li><strong>DALL·E 3</strong> — Generate stunning images from text descriptions</li><li><strong>Advanced Data Analysis</strong> — Upload files, create charts, analyze data</li><li><strong>Custom GPTs</strong> — Access and create specialized AI assistants</li><li><strong>Browse with Bing</strong> — Get real-time information from the internet</li></ul>
+        <h2>Pro Tips for Power Users</h2>
+        <p>Here are some tips that most ChatGPT users don't know about:</p>
+        <h3>1. Use System Prompts Effectively</h3>
+        <p>Start your conversation with a clear role assignment. For example: "You are an expert digital marketing strategist. Help me create a social media plan for my business."</p>
+        <h3>2. Chain Your Prompts</h3>
+        <p>Don't try to get everything in one prompt. Break your task into steps and build on each response.</p>
+        <h3>3. Use Custom GPTs</h3>
+        <p>Explore the GPT Store for specialized assistants. There are GPTs for coding, writing, design, SEO, and much more.</p>
+        <h2>Get ChatGPT Plus at Affordable Prices</h2>
+        <p>At Creator Tools, we offer ChatGPT Plus subscriptions starting from just Rs. 800/month with full warranty and instant delivery.</p>`
+      },
+      'canva-tips': {
+        title: '10 Canva Pro Tips That Will Transform Your Designs',
+        category: 'Tips & Tricks',
+        date: 'July 12, 2026',
+        readTime: '6 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #7c3aed, #00c4cc)',
+        icon: '🎨',
+        content: `<p>Canva Pro is a must-have tool for any creator. It unlocks premium assets, magical resize features, and much more. Here are some pro tips to help you create stunning designs.</p>
+        <h2>Unlock the Power of Background Remover</h2>
+        <p>The one-click background remover is arguably Canva Pro's best feature. It saves hours of manual editing and works perfectly even with complex images like hair or fur.</p>
+        <h2>Master the Brand Kit</h2>
+        <p>Keep your designs consistent by setting up your Brand Kit. Add your logos, color palettes, and fonts so they are always one click away when creating new content.</p>
+        <h2>Magic Resize</h2>
+        <p>Create once, publish everywhere. Use Magic Resize to instantly adapt your Instagram post into a Twitter header, Facebook cover, or Pinterest pin without losing your design integrity.</p>
+        <h2>Get Canva Pro Cheap</h2>
+        <p>Don't want to pay the full price? Creator Tools offers Canva Pro subscriptions at heavily discounted rates so you can design without limits.</p>`
+      },
+      'ai-tools-2026': {
+        title: 'Top 10 AI Tools You Must Try in 2026',
+        category: 'Reviews',
+        date: 'July 10, 2026',
+        readTime: '10 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #4285f4, #ea4335)',
+        icon: '⭐',
+        content: `<p>AI is evolving at an unprecedented pace. Staying ahead of the curve means leveraging the right tools. Here is our curated list of the top AI tools you must try in 2026.</p>
+        <h2>1. ChatGPT Plus</h2>
+        <p>The ultimate AI assistant for text generation, coding, and analysis.</p>
+        <h2>2. Midjourney V6</h2>
+        <p>The gold standard for AI image generation, offering unparalleled photorealism and artistic styles.</p>
+        <h2>3. ElevenLabs</h2>
+        <p>The best AI voice generator on the market, perfect for video narration and podcasts.</p>
+        <h2>4. GitHub Copilot</h2>
+        <p>An indispensable tool for developers that helps write code faster and with fewer bugs.</p>
+        <h2>5. Perplexity AI</h2>
+        <p>A revolutionary AI search engine that provides cited answers instead of just links.</p>
+        <p>Ready to upgrade your toolkit? Check out our <a href="products.html">All Tools</a> section for premium access to these AI wonders at incredible prices.</p>`
+      },
+      'midjourney-tutorial': {
+        title: 'Midjourney Beginner\'s Guide: From Zero to Amazing Art',
+        category: 'Guides',
+        date: 'July 8, 2026',
+        readTime: '12 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #5865f2, #404eed)',
+        icon: '🌟',
+        content: `<p>Midjourney can seem intimidating at first because it operates through Discord. But once you get the hang of it, the results are simply mind-blowing.</p>
+        <h2>Getting Started</h2>
+        <p>First, you'll need a Discord account and a Midjourney subscription. Join the official Midjourney Discord server and find a "newbies" channel to start generating.</p>
+        <h2>Your First Prompt</h2>
+        <p>Type <code>/imagine</code> and then your prompt. Start simple: <em>"a cute cat in space, cinematic lighting"</em>. Wait a minute, and you'll get a grid of four images.</p>
+        <h2>Understanding the Buttons</h2>
+        <ul>
+          <li><strong>U1-U4:</strong> Upscale the selected image to a higher resolution.</li>
+          <li><strong>V1-V4:</strong> Create variations based on the selected image.</li>
+          <li><strong>🔄 (Re-roll):</strong> Generate four new images with the same prompt.</li>
+        </ul>
+        <h2>Advanced Parameters</h2>
+        <p>Use parameters like <code>--ar 16:9</code> for aspect ratio, or <code>--v 6.0</code> to specify the version. These small tweaks make a huge difference.</p>`
+      },
+      'netflix-tricks': {
+        title: '5 Netflix Premium Tricks You Didn\'t Know About',
+        category: 'Tips & Tricks',
+        date: 'July 5, 2026',
+        readTime: '4 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #e50914, #831010)',
+        icon: '🎬',
+        content: `<p>We all love Netflix, but are you getting the most out of your Premium 4K subscription? Here are some hidden tricks to elevate your binge-watching experience.</p>
+        <h2>1. Unlock Hidden Categories</h2>
+        <p>Netflix has thousands of secret categories. Log in on a browser and go to <code>netflix.com/browse/genre/CODE</code> (replace CODE with specific numbers like 43040 for Action Comedies or 67673 for Disney movies).</p>
+        <h2>2. Customize Subtitles</h2>
+        <p>Did you know you can change the color, font, and size of your subtitles? Go to Account > Profile & Parental Controls > Subtitle appearance.</p>
+        <h2>3. Download for Offline Viewing (Smart Downloads)</h2>
+        <p>Enable Smart Downloads in the app settings. It automatically deletes episodes you've finished and downloads the next one when you're on Wi-Fi.</p>
+        <h2>4. Play Roulette</h2>
+        <p>Can't decide what to watch? Let Netflix choose for you by clicking the "Play Something" button.</p>
+        <h2>Get Netflix Premium</h2>
+        <p>Enjoy these features in glorious 4K with our affordable Netflix Premium plans, starting at just Rs. 400/month.</p>`
+      },
+      'seo-tools-guide': {
+        title: 'Best SEO Tools for Pakistani Businesses in 2026',
+        category: 'Guides',
+        date: 'July 3, 2026',
+        readTime: '9 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #ff642d, #cc4f23)',
+        icon: '🔍',
+        content: `<p>For businesses in Pakistan, dominating local search results is crucial. Here are the top SEO tools that offer the best return on investment.</p>
+        <h2>Ahrefs: The Powerhouse</h2>
+        <p>Ahrefs remains the king of backlink analysis and keyword research. Its Site Audit tool is invaluable for finding technical SEO issues. While expensive, it's worth every penny for serious marketers.</p>
+        <h2>Semrush: The All-in-One Suite</h2>
+        <p>Semrush excels in competitive research. It shows you exactly what keywords your competitors are ranking for and helps you track your own rankings accurately.</p>
+        <h2>Moz Pro: Great for Beginners</h2>
+        <p>Moz offers a more user-friendly interface with excellent educational resources. Their Domain Authority metric is an industry standard.</p>
+        <h2>Affordable Access</h2>
+        <p>We know these tools can be pricey. That's why Creator Tools offers shared access to premium SEO suites at a fraction of the original cost, helping local businesses compete globally.</p>`
+      },
+      'video-editing-tools': {
+        title: 'Best Video Editing Tools for Content Creators',
+        category: 'Reviews',
+        date: 'July 1, 2026',
+        readTime: '7 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #00f0ff, #0066ff)',
+        icon: '🎬',
+        content: `<p>Video content is king, and choosing the right editing software can make or break your workflow. Let's compare the top options.</p>
+        <h2>CapCut Pro: The Social Media King</h2>
+        <p>If you're creating for TikTok, Reels, or Shorts, CapCut Pro is unbeatable. Its built-in templates, auto-captions, and trending effects make vertical video editing a breeze.</p>
+        <h2>Adobe Premiere Pro: The Industry Standard</h2>
+        <p>For professional YouTubers and filmmakers, Premiere Pro offers unmatched control and integration with other Adobe Creative Cloud apps like After Effects.</p>
+        <h2>DaVinci Resolve: The Color Grading Master</h2>
+        <p>Resolve offers Hollywood-grade color correction. While there is a steep learning curve, the results are phenomenal.</p>
+        <h2>Filmora: The Balanced Choice</h2>
+        <p>Wondershare Filmora hits the sweet spot between ease of use and advanced features, making it perfect for intermediate creators.</p>`
+      },
+      'digital-tools-save': {
+        title: 'How to Save 70% on Premium Digital Tools',
+        category: 'News',
+        date: 'June 28, 2026',
+        readTime: '5 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #0d9488, #10b981)',
+        icon: '💰',
+        content: `<p>Premium subscriptions can quickly drain your wallet. If you're paying full price for ChatGPT, Canva, Netflix, and Adobe, you're missing out on huge savings.</p>
+        <h2>The Shared Subscription Model</h2>
+        <p>Many digital tools allow for team or family plans. By leveraging these plans and securely sharing access, costs can be split among multiple users. This is completely legal and safe when managed by a trusted provider.</p>
+        <h2>Why Choose Creator Tools?</h2>
+        <p>At Creator Tools, we manage these premium accounts so you don't have to. We ensure 99.9% uptime, secure access, and provide instant support.</p>
+        <h2>Our Promise</h2>
+        <ul>
+          <li><strong>Instant Delivery:</strong> Get access within minutes of payment.</li>
+          <li><strong>Full Warranty:</strong> If an account stops working, we replace it instantly.</li>
+          <li><strong>24/7 Support:</strong> Our WhatsApp support is always ready to help.</li>
+        </ul>
+        <p>Stop overpaying for your essential digital tools today!</p>`
+      },
+      'welcome-post': {
+        title: 'Welcome to the Creator Tools Blog!',
+        category: 'News',
+        date: 'July 18, 2026',
+        readTime: '5 min read',
+        author: 'Creator Tools Team',
+        gradient: 'linear-gradient(135deg, #0d9488, #10b981)',
+        icon: '🎉',
+        content: `<p>We're thrilled to announce the launch of the official Creator Tools Blog! Our mission has always been to provide the best digital tools at affordable prices, and now we want to help you use them better.</p>
+        <h2>What to Expect</h2>
+        <p>On this blog, you'll find a wide range of content tailored for digital creators, marketers, and enthusiasts:</p>
+        <ul>
+          <li><strong>Guides:</strong> In-depth tutorials on how to get the most out of complex software like ChatGPT and Premiere Pro.</li>
+          <li><strong>Tips & Tricks:</strong> Short, actionable advice to speed up your workflow.</li>
+          <li><strong>Reviews:</strong> Honest comparisons of the latest tools to help you decide what's right for you.</li>
+          <li><strong>News:</strong> Updates on the digital tools industry and new offerings on our platform.</li>
+        </ul>
+        <h2>Join the Community</h2>
+        <p>We encourage you to share our posts on social media and join our WhatsApp community to stay updated. Let's create amazing things together!</p>`
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+      
+      const post = blogData[postId];
+      
+      if (!post) {
+        window.location.href = 'blog.html';
+        return;
+      }
+      
+      document.title = `${post.title} - Creator Tools`;
+      document.getElementById('breadcrumbTitle').textContent = post.title;
+      document.getElementById('postCategory').textContent = post.category;
+      document.getElementById('postTitle').textContent = post.title;
+      document.getElementById('postDate').innerHTML = `📅 ${post.date}`;
+      document.getElementById('postReadTime').innerHTML = `⏱️ ${post.readTime}`;
+      document.getElementById('postAuthor').innerHTML = `✍️ ${post.author}`;
+      
+      const cover = document.getElementById('postCover');
+      cover.style.background = post.gradient;
+      document.getElementById('postIcon').textContent = post.icon;
+      
+      document.getElementById('postContent').innerHTML = post.content;
+      
+      const allIds = Object.keys(blogData).filter(id => id !== postId);
+      for (let i = allIds.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allIds[i], allIds[j]] = [allIds[j], allIds[i]];
+      }
+      
+      const relatedIds = allIds.slice(0, 3);
+      const relatedGrid = document.getElementById('relatedPostsGrid');
+      
+      relatedIds.forEach(id => {
+        const rp = blogData[id];
+        const cardHtml = `
+          <article class="blog-card">
+            <div class="blog-card__image" style="background: ${rp.gradient}">
+              <span class="blog-card__category">${rp.category}</span>
+              <span class="blog-card__icon">${rp.icon}</span>
+            </div>
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span>📅 ${rp.date}</span>
+                <span>⏱️ ${rp.readTime}</span>
+              </div>
+              <h3 class="blog-card__title">${rp.title}</h3>
+              <a href="blog-post.html?id=${id}" class="blog-card__link">Read More →</a>
+            </div>
+          </article>
+        `;
+        relatedGrid.innerHTML += cardHtml;
+      });
+    });
+  </script>
+</body>
+</html>

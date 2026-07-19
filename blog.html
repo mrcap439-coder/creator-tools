@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Resources - Creator Tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Blog Categories */
+    .blog-categories {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .blog-cat-btn {
+      padding: 10px 24px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+    .blog-cat-btn:hover { border-color: var(--accent-1); color: var(--text-primary); }
+    .blog-cat-btn.active { background: var(--accent-gradient); color: white; border-color: transparent; }
+
+    /* Featured Post */
+    .blog-featured {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      min-height: 350px;
+      transition: all 0.3s;
+    }
+    .blog-featured:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(13,148,136,0.1); }
+    .blog-featured__image {
+      background: linear-gradient(135deg, #0d9488, #10b981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+    }
+    .blog-featured__badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 6px 16px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .blog-featured__content {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+    .blog-featured__meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .blog-featured__title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .blog-featured__excerpt {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+    .blog-featured__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-1);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: gap 0.3s;
+    }
+    .blog-featured__link:hover { gap: 12px; }
+
+    /* Blog Grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* Blog Card */
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(13,148,136,0.1);
+      border-color: rgba(13,148,136,0.3);
+    }
+    .blog-card__image {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .blog-card__icon { font-size: 3.5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+    .blog-card__category {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 14px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .blog-card__content { padding: 20px; }
+    .blog-card__meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .blog-card__title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .blog-card__excerpt {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .blog-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-1);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: gap 0.3s;
+    }
+    .blog-card__link:hover { gap: 10px; }
+
+    @media (max-width: 768px) {
+      .blog-featured { grid-template-columns: 1fr; }
+      .blog-featured__image { min-height: 200px; }
+      .blog-featured__content { padding: 24px; }
+      .blog-featured__title { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container container">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>
+        <span><span class="gradient-text">Creator</span> Tools</span>
+      </a>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">All Tools</a></li>
+        <li><a href="#">Free Tools</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+      </ul>
+      <div class="navbar__right">
+        <button class="navbar__theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+        <a href="login.html" class="navbar__cta">Login</a>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="page-header__bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="container page-header__content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a> / <span>Blog</span>
+      </div>
+      <h1 class="page-header__title">Blog & <span class="gradient-text">Resources</span></h1>
+      <p class="page-header__subtitle">Tips, guides, and insights for digital creators</p>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 60px 0;">
+    <div class="blog-categories">
+      <button class="blog-cat-btn active" data-category="all">All Posts</button>
+      <button class="blog-cat-btn" data-category="guides">Guides</button>
+      <button class="blog-cat-btn" data-category="tips">Tips & Tricks</button>
+      <button class="blog-cat-btn" data-category="reviews">Reviews</button>
+      <button class="blog-cat-btn" data-category="news">News</button>
+    </div>
+
+    <!-- Featured Post -->
+    <article class="blog-featured" data-category="news">
+      <div class="blog-featured__image">
+        <span class="blog-featured__badge">News</span>
+        <span>🎉</span>
+      </div>
+      <div class="blog-featured__content">
+        <div class="blog-featured__meta">
+          <span>📅 July 18, 2026</span>
+          <span>⏱️ 5 min read</span>
+        </div>
+        <h2 class="blog-featured__title">Welcome to the Creator Tools Blog!</h2>
+        <p class="blog-featured__excerpt">We're launching our new blog to bring you the best tips, guides, and reviews on digital tools to help you succeed in your creative journey.</p>
+        <a href="blog-post.html?id=welcome-post" class="blog-featured__link">Read More →</a>
+      </div>
+    </article>
+
+    <div class="blog-grid" id="blogGrid">
+      <article class="blog-card" data-category="guides">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #10a37f, #1a7f64)">
+          <span class="blog-card__category">Guides</span>
+          <span class="blog-card__icon">🤖</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 July 15, 2026</span>
+            <span>⏱️ 8 min read</span>
+          </div>
+          <h3 class="blog-card__title">Complete Guide: How to Use ChatGPT Plus Like a Pro</h3>
+          <p class="blog-card__excerpt">Learn all the hidden features of ChatGPT Plus that most users don't know about...</p>
+          <a href="blog-post.html?id=chatgpt-guide" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="tips">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #7c3aed, #00c4cc)">
+          <span class="blog-card__category">Tips & Tricks</span>
+          <span class="blog-card__icon">🎨</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 July 12, 2026</span>
+            <span>⏱️ 6 min read</span>
+          </div>
+          <h3 class="blog-card__title">10 Canva Pro Tips That Will Transform Your Designs</h3>
+          <p class="blog-card__excerpt">Take your design game to the next level with these professional Canva Pro tricks...</p>
+          <a href="blog-post.html?id=canva-tips" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="reviews">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #4285f4, #ea4335)">
+          <span class="blog-card__category">Reviews</span>
+          <span class="blog-card__icon">⭐</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 July 10, 2026</span>
+            <span>⏱️ 10 min read</span>
+          </div>
+          <h3 class="blog-card__title">Top 10 AI Tools You Must Try in 2026</h3>
+          <p class="blog-card__excerpt">From ChatGPT to Midjourney, discover the AI tools that are changing the game...</p>
+          <a href="blog-post.html?id=ai-tools-2026" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="guides">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #5865f2, #404eed)">
+          <span class="blog-card__category">Guides</span>
+          <span class="blog-card__icon">🌟</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 July 8, 2026</span>
+            <span>⏱️ 12 min read</span>
+          </div>
+          <h3 class="blog-card__title">Midjourney Beginner's Guide: From Zero to Amazing Art</h3>
+          <p class="blog-card__excerpt">Start creating stunning AI art with Midjourney even if you have zero experience...</p>
+          <a href="blog-post.html?id=midjourney-tutorial" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="tips">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #e50914, #831010)">
+          <span class="blog-card__category">Tips & Tricks</span>
+          <span class="blog-card__icon">🎬</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 July 5, 2026</span>
+            <span>⏱️ 4 min read</span>
+          </div>
+          <h3 class="blog-card__title">5 Netflix Premium Tricks You Didn't Know About</h3>
+          <p class="blog-card__excerpt">Get the most out of your Netflix Premium subscription with these hidden features...</p>
+          <a href="blog-post.html?id=netflix-tricks" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="guides">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #ff642d, #cc4f23)">
+          <span class="blog-card__category">Guides</span>
+          <span class="blog-card__icon">🔍</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 July 3, 2026</span>
+            <span>⏱️ 9 min read</span>
+          </div>
+          <h3 class="blog-card__title">Best SEO Tools for Pakistani Businesses in 2026</h3>
+          <p class="blog-card__excerpt">Grow your online presence with these powerful SEO tools at affordable prices...</p>
+          <a href="blog-post.html?id=seo-tools-guide" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="reviews">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #00f0ff, #0066ff)">
+          <span class="blog-card__category">Reviews</span>
+          <span class="blog-card__icon">🎬</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 July 1, 2026</span>
+            <span>⏱️ 7 min read</span>
+          </div>
+          <h3 class="blog-card__title">Best Video Editing Tools for Content Creators</h3>
+          <p class="blog-card__excerpt">Compare CapCut Pro, Filmora, and Kinemaster to find the perfect editor for you...</p>
+          <a href="blog-post.html?id=video-editing-tools" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+
+      <article class="blog-card" data-category="news">
+        <div class="blog-card__image" style="background: linear-gradient(135deg, #0d9488, #10b981)">
+          <span class="blog-card__category">News</span>
+          <span class="blog-card__icon">💰</span>
+        </div>
+        <div class="blog-card__content">
+          <div class="blog-card__meta">
+            <span>📅 June 28, 2026</span>
+            <span>⏱️ 5 min read</span>
+          </div>
+          <h3 class="blog-card__title">How to Save 70% on Premium Digital Tools</h3>
+          <p class="blog-card__excerpt">Smart strategies to get premium subscriptions at a fraction of the original cost...</p>
+          <a href="blog-post.html?id=digital-tools-save" class="blog-card__link">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="text-align: center; padding: 40px 0;">
+      <p>&copy; 2026 Creator Tools. All rights reserved.</p>
+      <div style="margin-top: 20px; display: flex; justify-content: center; gap: 16px;">
+        <a href="https://www.facebook.com/share/18v67h63hg/" target="_blank" style="color: var(--text-secondary);">Facebook</a>
+        <a href="https://wa.me/923126575447" target="_blank" style="color: var(--text-secondary);">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923126575447" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp" style="position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 100;">
+    📱
+  </a>
+
+  <script src="script.js"></script>
+  <script>
+    // Blog category filter
+    document.querySelectorAll('.blog-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.blog-cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.category;
+        
+        // Filter featured post
+        const featuredPost = document.querySelector('.blog-featured');
+        if (featuredPost) {
+          if (cat === 'all' || featuredPost.dataset.category === cat) {
+            featuredPost.style.display = 'grid'; // Need to restore grid layout
+          } else {
+            featuredPost.style.display = 'none';
+          }
+        }
+        
+        // Filter normal cards
+        document.querySelectorAll('.blog-card').forEach(card => {
+          if (cat === 'all' || card.dataset.category === cat) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

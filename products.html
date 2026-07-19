@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Digital Tools — Creator Tools</title>
+  <meta name="description" content="Browse and buy premium digital tools at affordable prices. ChatGPT, Canva, Netflix, Spotify and more with fast delivery and warranty.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container container">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>
+        <span><span class="gradient-text">Creator</span> Tools</span>
+      </a>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">All Tools</a></li>
+        <li><a href="#">Free Tools</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <div class="navbar__right">
+        <button class="navbar__theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <a class="navbar__cta" href="login.html" style="background:transparent;color:var(--accent-1);border:2px solid var(--accent-1);">Login</a>`n          <a class="navbar__cta" href="register.html">Register</a>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="hero__bg">
+        <div class="hero__orb hero__orb--1"></div>
+        <div class="hero__orb hero__orb--2"></div>
+      </div>
+      <div class="container">
+        <h1 class="page-header__title">All Digital Tools</h1>
+        <p class="page-header__subtitle">Browse our complete collection of premium digital tools at affordable prices</p>
+        <div class="page-header__breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>All Tools</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Bar + Products Section -->
+    <section class="section">
+      <div class="container">
+        <div class="filter-bar">
+          <input type="text" class="filter-bar__search" placeholder="Search tools..." id="searchInput">
+          <div class="filter-bar__categories">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="ai">AI Tools</button>
+            <button class="filter-btn" data-category="design">Design</button>
+            <button class="filter-btn" data-category="streaming">Streaming</button>
+            <button class="filter-btn" data-category="productivity">Productivity</button>
+            <button class="filter-btn" data-category="video">Video Editing</button>
+          </div>
+        </div>
+        <div class="products-grid" id="productsGrid">
+          
+          <!-- Product 1 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="ChatGPT Plus">
+            <div class="product-card__image">
+              <img src="assets/logos/chatgpt-plus.jpg" alt="ChatGPT Plus" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">ChatGPT Plus</h3>
+              <p class="product-card__desc">Access GPT-4o, DALL·E, Advanced Data Analysis and more</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 800
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Canva Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/canva-pro.jpg" alt="Canva Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Canva Pro</h3>
+              <p class="product-card__desc">Premium templates, Brand Kit, Background Remover & more</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 250
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card animate-on-scroll" data-category="streaming" data-name="Netflix Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/netflix-premium.jpg" alt="Netflix Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--streaming">Streaming</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">STREAMING</span>
+              <h3 class="product-card__title">Netflix Premium</h3>
+              <p class="product-card__desc">4K Ultra HD streaming on 4 screens simultaneously</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 350
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card animate-on-scroll" data-category="streaming" data-name="Spotify Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/spotify-premium.jpg" alt="Spotify Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--streaming">Streaming</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">STREAMING</span>
+              <h3 class="product-card__title">Spotify Premium</h3>
+              <p class="product-card__desc">Ad-free music, offline downloads, high quality audio</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 200
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Adobe Creative Cloud">
+            <div class="product-card__image">
+              <img src="assets/logos/adobe-cc.jpg" alt="Adobe Creative Cloud" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Adobe Creative Cloud</h3>
+              <p class="product-card__desc">Photoshop, Illustrator, Premiere Pro & 20+ apps</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 1,200
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Grammarly Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/grammarly.jpg" alt="Grammarly Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Grammarly Premium</h3>
+              <p class="product-card__desc">Advanced grammar, tone detection, plagiarism checker</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 400
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div class="product-card animate-on-scroll" data-category="streaming" data-name="YouTube Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/youtube-premium.jpg" alt="YouTube Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--streaming">Streaming</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">STREAMING</span>
+              <h3 class="product-card__title">YouTube Premium</h3>
+              <p class="product-card__desc">Ad-free videos, YouTube Music, offline downloads</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 250
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Midjourney">
+            <div class="product-card__image">
+              <img src="assets/logos/midjourney.jpg" alt="Midjourney" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Midjourney</h3>
+              <p class="product-card__desc">AI image generation with stunning artistic quality</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 1,500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 9 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Coursera Plus">
+            <div class="product-card__image">
+              <img src="assets/logos/coursera.jpg" alt="Coursera Plus" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Coursera Plus</h3>
+              <p class="product-card__desc">Access 7,000+ courses, certificates & specializations</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 600
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 10 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Envato Elements">
+            <div class="product-card__image">
+              <img src="assets/logos/envato.jpg" alt="Envato Elements" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Envato Elements</h3>
+              <p class="product-card__desc">Unlimited downloads of templates, photos, fonts & more</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 11 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Semrush Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/semrush.jpg" alt="Semrush Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Semrush Pro</h3>
+              <p class="product-card__desc">SEO, keyword research, competitor analysis tools</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 900
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 12 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Figma Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/figma-pro.jpg" alt="Figma Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Figma Pro</h3>
+              <p class="product-card__desc">Professional UI/UX design & prototyping tool</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 350
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 13 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Claude AI">
+            <div class="product-card__image">
+              <img src="assets/logos/claude-ai.jpg" alt="Claude AI" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Claude AI</h3>
+              <p class="product-card__desc">Advanced AI assistant by Anthropic with 200K context</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 1,000
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 14 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Gemini Advanced">
+            <div class="product-card__image">
+              <img src="assets/logos/gemini.jpg" alt="Gemini Advanced" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Gemini Advanced</h3>
+              <p class="product-card__desc">Google's most capable AI model with 1M context window</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 700
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 15 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Microsoft Copilot">
+            <div class="product-card__image">
+              <img src="assets/logos/copilot.jpg" alt="Microsoft Copilot" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Microsoft Copilot</h3>
+              <p class="product-card__desc">AI-powered assistant integrated across Microsoft 365</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 900
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 16 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Notion Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/notion.jpg" alt="Notion Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Notion Premium</h3>
+              <p class="product-card__desc">All-in-one workspace for notes, docs, wikis & projects</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 300
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 17 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Zoom Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/zoom.jpg" alt="Zoom Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Zoom Premium</h3>
+              <p class="product-card__desc">Unlimited meetings, cloud recording, breakout rooms</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 18 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="LinkedIn Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/linkedin.jpg" alt="LinkedIn Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">LinkedIn Premium</h3>
+              <p class="product-card__desc">InMail, salary insights, LinkedIn Learning access</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 800
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 19 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Shutterstock">
+            <div class="product-card__image">
+              <img src="assets/logos/shutterstock.jpg" alt="Shutterstock" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Shutterstock</h3>
+              <p class="product-card__desc">Millions of stock photos, vectors, illustrations & videos</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 600
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 20 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="iStock">
+            <div class="product-card__image">
+              <img src="assets/logos/istock.jpg" alt="iStock" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">iStock</h3>
+              <p class="product-card__desc">Curated premium stock photos and illustrations</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 21 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Picsart Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/picsart.jpg" alt="Picsart Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Picsart Pro</h3>
+              <p class="product-card__desc">AI photo editor, templates, stickers & design tools</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 250
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 22 -->
+          <div class="product-card animate-on-scroll" data-category="video" data-name="CapCut Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/capcut.jpg" alt="CapCut Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--video">Video</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">VIDEO</span>
+              <h3 class="product-card__title">CapCut Pro</h3>
+              <p class="product-card__desc">Professional video editing with premium effects & filters</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 300
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 23 -->
+          <div class="product-card animate-on-scroll" data-category="video" data-name="InShot Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/inshot.jpg" alt="InShot Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--video">Video</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">VIDEO</span>
+              <h3 class="product-card__title">InShot Pro</h3>
+              <p class="product-card__desc">Easy mobile video editor with music, filters & effects</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 200
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 24 -->
+          <div class="product-card animate-on-scroll" data-category="video" data-name="Filmora">
+            <div class="product-card__image">
+              <img src="assets/logos/filmora.jpg" alt="Filmora" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--video">Video</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">VIDEO</span>
+              <h3 class="product-card__title">Filmora</h3>
+              <p class="product-card__desc">Powerful desktop video editor with AI features</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 400
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 25 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="NordVPN">
+            <div class="product-card__image">
+              <img src="assets/logos/nordvpn.jpg" alt="NordVPN" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">NordVPN</h3>
+              <p class="product-card__desc">Fast & secure VPN with 5,500+ servers worldwide</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 300
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 26 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Skillshare">
+            <div class="product-card__image">
+              <img src="assets/logos/skillshare.jpg" alt="Skillshare" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Skillshare</h3>
+              <p class="product-card__desc">Creative classes in design, business & technology</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 350
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 27 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Udemy Business">
+            <div class="product-card__image">
+              <img src="assets/logos/udemy.jpg" alt="Udemy Business" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Udemy Business</h3>
+              <p class="product-card__desc">25,000+ professional courses for teams & individuals</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 28 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="EdrawMind">
+            <div class="product-card__image">
+              <img src="assets/logos/edrawmind.jpg" alt="EdrawMind" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">EdrawMind</h3>
+              <p class="product-card__desc">Professional mind mapping & brainstorming tool</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 400
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 29 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="ElevenLabs">
+            <div class="product-card__image">
+              <img src="assets/logos/elevenlabs.jpg" alt="ElevenLabs" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">ElevenLabs</h3>
+              <p class="product-card__desc">Most realistic AI voice generation & text-to-speech</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 800
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 30 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Synthesia">
+            <div class="product-card__image">
+              <img src="assets/logos/synthesia.jpg" alt="Synthesia" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Synthesia</h3>
+              <p class="product-card__desc">Create AI videos with realistic avatars & voiceovers</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 1,500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 31 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="HeyGen">
+            <div class="product-card__image">
+              <img src="assets/logos/heygen.jpg" alt="HeyGen" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">HeyGen</h3>
+              <p class="product-card__desc">AI video creator with talking avatars & translations</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 1,200
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 32 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Moz Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/moz.jpg" alt="Moz Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Moz Pro</h3>
+              <p class="product-card__desc">Complete SEO toolset for search engine optimization</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 700
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 33 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Ahrefs">
+            <div class="product-card__image">
+              <img src="assets/logos/ahrefs.jpg" alt="Ahrefs" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Ahrefs</h3>
+              <p class="product-card__desc">Backlink analysis, keyword research & SEO tools</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 1,000
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 34 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Jasper AI">
+            <div class="product-card__image">
+              <img src="assets/logos/jasper-ai.jpg" alt="Jasper AI" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Jasper AI</h3>
+              <p class="product-card__desc">AI content writer for marketing, blogs & social media</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 900
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 35 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Kling AI">
+            <div class="product-card__image">
+              <img src="assets/logos/kling-ai.jpg" alt="Kling AI" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Kling AI</h3>
+              <p class="product-card__desc">Advanced AI video generation from text descriptions</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 800
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 36 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Pictory AI">
+            <div class="product-card__image">
+              <img src="assets/logos/pictory.jpg" alt="Pictory AI" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Pictory AI</h3>
+              <p class="product-card__desc">Turn scripts & blogs into engaging short videos with AI</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 700
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 37 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Runway ML">
+            <div class="product-card__image">
+              <img src="assets/logos/runway.jpg" alt="Runway ML" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Runway ML</h3>
+              <p class="product-card__desc">Next-gen AI creative tools for video & image generation</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 1,200
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 38 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Suno AI">
+            <div class="product-card__image">
+              <img src="assets/logos/suno-ai.jpg" alt="Suno AI" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Suno AI</h3>
+              <p class="product-card__desc">Create original music and songs using AI</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 600
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 39 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Leonardo AI">
+            <div class="product-card__image">
+              <img src="assets/logos/leonardo-ai.jpg" alt="Leonardo AI" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Leonardo AI</h3>
+              <p class="product-card__desc">AI art generator with fine-tuned models & image editing</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 40 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Perplexity Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/perplexity.jpg" alt="Perplexity Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Perplexity Pro</h3>
+              <p class="product-card__desc">AI-powered search engine with real-time citations</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 600
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 41 -->
+          <div class="product-card animate-on-scroll" data-category="ai" data-name="Writesonic">
+            <div class="product-card__image">
+              <img src="assets/logos/writesonic.jpg" alt="Writesonic" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--ai">AI</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">AI</span>
+              <h3 class="product-card__title">Writesonic</h3>
+              <p class="product-card__desc">AI copywriting tool for ads, blogs & product descriptions</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 500
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 42 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Quillbot Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/quillbot.jpg" alt="Quillbot Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Quillbot Premium</h3>
+              <p class="product-card__desc">AI paraphrasing tool, grammar checker & summarizer</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 300
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 43 -->
+          <div class="product-card animate-on-scroll" data-category="productivity" data-name="Surfer SEO">
+            <div class="product-card__image">
+              <img src="assets/logos/surfer-seo.jpg" alt="Surfer SEO" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--productivity">Productivity</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">PRODUCTIVITY</span>
+              <h3 class="product-card__title">Surfer SEO</h3>
+              <p class="product-card__desc">Data-driven SEO content optimization tool</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 800
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 44 -->
+          <div class="product-card animate-on-scroll" data-category="video" data-name="VN Video Editor Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/vn-editor.jpg" alt="VN Video Editor Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--video">Video</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">VIDEO</span>
+              <h3 class="product-card__title">VN Video Editor Pro</h3>
+              <p class="product-card__desc">Professional multi-track video editor for mobile</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 200
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 45 -->
+          <div class="product-card animate-on-scroll" data-category="video" data-name="Kinemaster Pro">
+            <div class="product-card__image">
+              <img src="assets/logos/kinemaster.jpg" alt="Kinemaster Pro" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--video">Video</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">VIDEO</span>
+              <h3 class="product-card__title">Kinemaster Pro</h3>
+              <p class="product-card__desc">Feature-rich mobile video editor with layers & effects</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 250
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 46 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Freepik Premium">
+            <div class="product-card__image" style="background: linear-gradient(135deg, #0065ff, #00c3ff)">
+              <svg class="product-card__logo-svg" width="80" height="80" viewBox="0 0 80 80">
+                <rect width="80" height="80" rx="18" fill="rgba(255,255,255,0.15)"/>
+                <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="'Outfit',sans-serif" font-weight="700" font-size="38">F</text>
+              </svg>
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Freepik Premium</h3>
+              <p class="product-card__desc">Download premium vectors, photos, PSD & icons</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 300
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 47 -->
+          <div class="product-card animate-on-scroll" data-category="video" data-name="Opus Clip">
+            <div class="product-card__image">
+              <img src="assets/logos/opus-clip.jpg" alt="Opus Clip" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--video">Video</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">VIDEO</span>
+              <h3 class="product-card__title">Opus Clip</h3>
+              <p class="product-card__desc">AI-powered tool to create viral short clips from videos</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 600
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 48 -->
+          <div class="product-card animate-on-scroll" data-category="design" data-name="Pixlr Premium">
+            <div class="product-card__image">
+              <img src="assets/logos/pixlr.jpg" alt="Pixlr Premium" class="product-card__logo-img">
+              <span class="product-card__badge product-card__badge--design">Design</span>
+            </div>
+            <div class="product-card__content">
+              <span class="product-card__category">DESIGN</span>
+              <h3 class="product-card__title">Pixlr Premium</h3>
+              <p class="product-card__desc">Online photo editor with AI-powered tools</p>
+              <div class="product-card__footer">
+                <div class="product-card__price">
+                  <span>Starting from</span>
+                  Rs. 250
+                </div>
+                <a href="product-detail.html" class="product-card__cta">View Plans</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <span class="navbar__logo-icon">⚡</span>
+            <span><span class="gradient-text">Creator</span> Tools</span>
+          </a>
+          <p class="footer__desc">Premium digital tools at affordable prices with reliable support and warranty.</p>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/share/18v67h63hg/" target="_blank" aria-label="Facebook">📱</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="https://wa.me/923126575447" target="_blank" aria-label="WhatsApp">💬</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Quick Links</h4>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Tools</a></li>
+            <li><a href="#">Free Tools</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="#">My Account</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Support</h4>
+          <ul class="footer__links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Warranty Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Trust & Safety</h4>
+          <ul class="footer__links">
+            <li>✅ Verified Plans</li>
+            <li>✅ Secure Delivery</li>
+            <li>✅ Warranty Support</li>
+            <li>✅ Fast WhatsApp Help</li>
+            <li>✅ Trusted Since 2024</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 Creator Tools — All rights reserved.</p>
+        <div class="footer__badges">
+          <span class="footer__badge">⚡ Premium Tools</span>
+          <span class="footer__badge">🛡️ Secure</span>
+          <span class="footer__badge">💬 24/7 Support</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/923126575447" class="whatsapp-btn" target="_blank" aria-label="WhatsApp Support">💬</a>
+
+  <script src="products-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

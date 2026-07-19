@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details — Creator Tools</title>
+  <meta name="description" content="Buy premium digital tools at affordable prices with instant delivery and warranty.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container container">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>
+        <span><span class="gradient-text">Creator</span> Tools</span>
+      </a>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">All Tools</a></li>
+        <li><a href="#">Free Tools</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <div class="navbar__right">
+        <button class="navbar__theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <a class="navbar__cta" href="login.html" style="background:transparent;color:var(--accent-1);border:2px solid var(--accent-1);">Login</a>`n          <a class="navbar__cta" href="register.html">Register</a>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="product-detail">
+      <div class="container">
+        <div class="page-header__breadcrumb" style="justify-content: flex-start; margin-bottom: 32px; padding-top: 100px;">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <a href="products.html">All Tools</a>
+          <span>/</span>
+          <span id="breadcrumbName">Loading...</span>
+        </div>
+        <div class="product-detail__grid">
+          <!-- Left: Image -->
+          <div class="product-detail__image" id="productImage">
+            <!-- Will be populated by JS -->
+          </div>
+          <!-- Right: Info -->
+          <div class="product-detail__info">
+            <span class="product-detail__category" id="productCategory"></span>
+            <h1 class="product-detail__title" id="productTitle">Loading...</h1>
+            <p class="product-detail__desc" id="productDesc"></p>
+            
+            <h3 style="font-size: 1.1rem; font-weight: 600; font-family: 'Outfit', sans-serif;">Select Your Plan</h3>
+            
+            <div class="product-detail__plans" id="productPlans">
+              <!-- Plans will be populated by JS -->
+            </div>
+            
+            <button class="product-detail__order-btn" id="orderBtn">
+              📭 Order Now via WhatsApp
+            </button>
+            
+            <div class="product-detail__features" id="productFeatures">
+              <!-- Features populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <span class="navbar__logo-icon">⚡</span>
+            <span><span class="gradient-text">Creator</span> Tools</span>
+          </a>
+          <p class="footer__desc">Premium digital tools at affordable prices with reliable support and warranty.</p>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/share/18v67h63hg/" target="_blank" aria-label="Facebook">📱</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="https://wa.me/923126575447" target="_blank" aria-label="WhatsApp">💬</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Quick Links</h4>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Tools</a></li>
+            <li><a href="#">Free Tools</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="#">My Account</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Support</h4>
+          <ul class="footer__links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Warranty Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Trust & Safety</h4>
+          <ul class="footer__links">
+            <li>✅ Verified Plans</li>
+            <li>✅ Secure Delivery</li>
+            <li>✅ Warranty Support</li>
+            <li>✅ Fast WhatsApp Help</li>
+            <li>✅ Trusted Since 2024</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 Creator Tools — All rights reserved.</p>
+        <div class="footer__badges">
+          <span class="footer__badge">⚡ Premium Tools</span>
+          <span class="footer__badge">🛡️ Secure</span>
+          <span class="footer__badge">💬 24/7 Support</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/923126575447" class="whatsapp-btn" target="_blank" aria-label="WhatsApp Support">💬</a>
+
+  <script src="products-data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Dynamic Product Loading
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+      
+      if (!productId || !window.productsData || !window.productsData[productId]) {
+        window.location.href = 'products.html';
+        return;
+      }
+      
+      const product = window.productsData[productId];
+      
+      // Update page title
+      document.title = product.name + ' — Buy Premium Plan — Creator Tools';
+      
+      // Update breadcrumb
+      document.getElementById('breadcrumbName').textContent = product.name;
+      
+      // Update product image
+      const imageDiv = document.getElementById('productImage');
+      if (product.logo) {
+        imageDiv.innerHTML = '<img src="' + product.logo + '" alt="' + product.name + '" class="product-card__logo-img" style="height: 200px; max-width: 90%;">';
+      } else {
+        imageDiv.innerHTML = '<span style="font-size: 6rem;">📦</span>';
+      }
+      
+      // Update category, title, description
+      document.getElementById('productCategory').textContent = product.category;
+      document.getElementById('productTitle').textContent = product.name;
+      document.getElementById('productDesc').textContent = product.description;
+      
+      // Generate plan cards
+      const plansContainer = document.getElementById('productPlans');
+      plansContainer.innerHTML = '';
+      product.plans.forEach(function(plan, index) {
+        const planDiv = document.createElement('div');
+        planDiv.className = 'plan-card' + (index === 1 ? ' selected' : '');
+        planDiv.setAttribute('data-price', plan.price);
+        planDiv.innerHTML = 
+          '<div class="plan-card__info">' +
+            '<span class="plan-card__name">' + plan.name + '</span>' +
+            '<span class="plan-card__details">' + plan.details + '</span>' +
+          '</div>' +
+          '<span class="plan-card__price">Rs. ' + plan.price.toLocaleString() + '</span>';
+        
+        planDiv.addEventListener('click', function() {
+          document.querySelectorAll('.plan-card').forEach(function(c) { c.classList.remove('selected'); });
+          planDiv.classList.add('selected');
+        });
+        
+        plansContainer.appendChild(planDiv);
+      });
+      
+      // Generate features
+      const featuresContainer = document.getElementById('productFeatures');
+      featuresContainer.innerHTML = '';
+      product.features.forEach(function(feature) {
+        const featureDiv = document.createElement('div');
+        featureDiv.className = 'product-detail__feature';
+        featureDiv.textContent = '✅ ' + feature;
+        featuresContainer.appendChild(featureDiv);
+      });
+      
+      // WhatsApp order button
+      document.getElementById('orderBtn').addEventListener('click', function() {
+        const selectedPlan = document.querySelector('.plan-card.selected');
+        const price = selectedPlan ? selectedPlan.getAttribute('data-price') : '';
+        const planName = selectedPlan ? selectedPlan.querySelector('.plan-card__name').textContent : '';
+        const msg = 'Hi! I want to order ' + product.name + ' (' + planName + ') for Rs. ' + price;
+        window.open('https://wa.me/923001234567?text=' + encodeURIComponent(msg), '_blank');
+      });
+    })();
+  </script>
+</body>
+</html>
