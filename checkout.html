@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Creator Tools</title>
+  <meta name="description" content="Complete your order for premium digital tools.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .checkout { padding-top: 100px; padding-bottom: 60px; min-height: 100vh; }
+    .checkout__grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: start; }
+    .checkout__form-card, .checkout__summary {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 16px; padding: 32px;
+    }
+    .checkout__summary { position: sticky; top: 90px; }
+    .checkout__title { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+    .checkout__subtitle { color: var(--text-secondary); margin-bottom: 24px; }
+    
+    .form-section { margin-bottom: 28px; }
+    .form-section__title { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-weight: 500; margin-bottom: 6px; font-size: 0.9rem; color: var(--text-secondary); }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 12px 16px; border: 2px solid var(--border-color);
+      border-radius: 10px; font-size: 0.95rem; font-family: 'Inter', sans-serif;
+      background: var(--bg-primary); color: var(--text-primary); transition: border-color 0.3s;
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #0d9488; }
+    .form-group textarea { resize: vertical; min-height: 70px; }
+
+    /* Payment Methods */
+    .payment-methods { display: flex; flex-direction: column; gap: 12px; }
+    .payment-card {
+      border: 2px solid var(--border-color); border-radius: 12px; padding: 16px;
+      cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 14px;
+    }
+    .payment-card:hover { border-color: #0d9488; background: rgba(13,148,136,0.03); }
+    .payment-card.selected { border-color: #0d9488; background: rgba(13,148,136,0.06); box-shadow: 0 0 0 3px rgba(13,148,136,0.12); }
+    .payment-card__radio {
+      width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ccc;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.3s;
+    }
+    .payment-card.selected .payment-card__radio { border-color: #0d9488; }
+    .payment-card.selected .payment-card__radio::after {
+      content: ''; width: 10px; height: 10px; border-radius: 50%; background: #0d9488;
+    }
+    .payment-card__icon { font-size: 1.8rem; flex-shrink: 0; }
+    .payment-card__info h4 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1rem; }
+    .payment-card__info p { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+
+    /* Payment Details Box */
+    .payment-details {
+      display: none; background: linear-gradient(135deg, rgba(13,148,136,0.06), rgba(16,185,129,0.06));
+      border: 1px solid rgba(13,148,136,0.2); border-radius: 12px; padding: 20px;
+      margin-top: 16px; animation: fadeIn 0.3s ease;
+    }
+    .payment-details.show { display: block; }
+    .payment-details__title { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; color: #0d9488; }
+    .payment-details__row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid rgba(13,148,136,0.1);
+    }
+    .payment-details__row:last-child { border-bottom: none; }
+    .payment-details__label { color: var(--text-secondary); font-size: 0.85rem; }
+    .payment-details__value { font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+    .copy-btn {
+      background: #0d9488; color: white; border: none; padding: 4px 10px;
+      border-radius: 6px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s;
+    }
+    .copy-btn:hover { background: #0f766e; transform: scale(1.05); }
+
+    /* Submit Button */
+    .checkout__submit {
+      width: 100%; padding: 16px; font-size: 1.1rem; font-weight: 700;
+      font-family: 'Outfit', sans-serif; color: white; border: none; border-radius: 12px;
+      background: linear-gradient(135deg, #0d9488, #10b981); cursor: pointer;
+      transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .checkout__submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(13,148,136,0.35); }
+    .checkout__submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* Summary */
+    .summary__product { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+    .summary__product img { width: 70px; height: 70px; object-fit: contain; border-radius: 12px; background: var(--bg-primary); padding: 8px; }
+    .summary__product-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .summary__product-plan { color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px; }
+    .summary__row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.9rem; }
+    .summary__row--total { border-top: 2px solid var(--border-color); margin-top: 8px; padding-top: 16px; font-size: 1.2rem; font-weight: 700; font-family: 'Outfit', sans-serif; color: #0d9488; }
+    .summary__trust { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-color); }
+    .summary__trust-item { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* Success Modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(4px);
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--bg-card); border-radius: 20px; padding: 40px; max-width: 440px;
+      width: 90%; text-align: center; animation: slideUp 0.4s ease;
+    }
+    .modal__check {
+      width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #0d9488, #10b981);
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+      font-size: 2.5rem; animation: popIn 0.5s ease 0.2s both;
+    }
+    .modal__title { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .modal__text { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 6px; }
+    .modal__order-id { font-family: 'Outfit', sans-serif; font-weight: 600; color: #0d9488; font-size: 1.1rem; margin: 12px 0; }
+    .modal__btns { display: flex; gap: 12px; margin-top: 24px; }
+    .modal__btn {
+      flex: 1; padding: 12px; border-radius: 10px; font-weight: 600; font-family: 'Outfit', sans-serif;
+      cursor: pointer; transition: all 0.2s; text-decoration: none; text-align: center; font-size: 0.9rem;
+    }
+    .modal__btn--whatsapp { background: #25d366; color: white; border: none; }
+    .modal__btn--whatsapp:hover { background: #1fb855; }
+    .modal__btn--home { background: transparent; border: 2px solid var(--border-color); color: var(--text-primary); }
+    .modal__btn--home:hover { border-color: #0d9488; color: #0d9488; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+
+    @media (max-width: 768px) {
+      .checkout__grid { grid-template-columns: 1fr; }
+      .checkout__summary { position: static; order: -1; }
+      .modal__btns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__container container">
+      <a href="index.html" class="navbar__logo">
+        <span class="navbar__logo-icon">⚡</span>
+        <span><span class="gradient-text">Creator</span> Tools</span>
+      </a>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">All Tools</a></li>
+        <li><a href="#">Free Tools</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <div class="navbar__right">
+        <button class="navbar__theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <a class="navbar__cta" href="login.html" style="background:transparent;color:var(--accent-1);border:2px solid var(--accent-1);">Login</a>
+        <a class="navbar__cta" href="register.html">Register</a>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="checkout">
+      <div class="container">
+        <h1 class="checkout__title">🛒 Secure Checkout</h1>
+        <p class="checkout__subtitle">Complete your order — payment verification within 30 minutes</p>
+
+        <div class="checkout__grid">
+          <!-- LEFT: Form -->
+          <div class="checkout__form-card">
+            <!-- Customer Details -->
+            <div class="form-section">
+              <h3 class="form-section__title">👤 Customer Details</h3>
+              <div class="form-group">
+                <label for="custName">Full Name *</label>
+                <input type="text" id="custName" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="custEmail">Email Address *</label>
+                <input type="email" id="custEmail" placeholder="your@email.com" required>
+              </div>
+              <div class="form-group">
+                <label for="custPhone">WhatsApp / Phone Number *</label>
+                <input type="tel" id="custPhone" placeholder="03XX-XXXXXXX" required>
+              </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="form-section">
+              <h3 class="form-section__title">💳 Select Payment Method</h3>
+              <div class="payment-methods">
+                <div class="payment-card" data-method="jazzcash" onclick="selectPayment(this)">
+                  <div class="payment-card__radio"></div>
+                  <div class="payment-card__icon">💚</div>
+                  <div class="payment-card__info">
+                    <h4>JazzCash</h4>
+                    <p>Send to mobile account</p>
+                  </div>
+                </div>
+                <div class="payment-card" data-method="easypaisa" onclick="selectPayment(this)">
+                  <div class="payment-card__radio"></div>
+                  <div class="payment-card__icon">💙</div>
+                  <div class="payment-card__info">
+                    <h4>EasyPaisa</h4>
+                    <p>Send to mobile account</p>
+                  </div>
+                </div>
+                <div class="payment-card" data-method="bank" onclick="selectPayment(this)">
+                  <div class="payment-card__radio"></div>
+                  <div class="payment-card__icon">🏦</div>
+                  <div class="payment-card__info">
+                    <h4>Bank Transfer</h4>
+                    <p>Direct bank deposit</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- JazzCash Details -->
+              <div class="payment-details" id="details-jazzcash">
+                <div class="payment-details__title">💚 JazzCash Payment Details</div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Account Number</span>
+                  <span class="payment-details__value">0312-6575447 <button class="copy-btn" onclick="copyText('03126575447')">Copy</button></span>
+                </div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Account Name</span>
+                  <span class="payment-details__value">Creator Tools</span>
+                </div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Amount</span>
+                  <span class="payment-details__value" id="jazz-amount">Rs. 0</span>
+                </div>
+              </div>
+
+              <!-- EasyPaisa Details -->
+              <div class="payment-details" id="details-easypaisa">
+                <div class="payment-details__title">💙 EasyPaisa Payment Details</div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Account Number</span>
+                  <span class="payment-details__value">0312-6575447 <button class="copy-btn" onclick="copyText('03126575447')">Copy</button></span>
+                </div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Account Name</span>
+                  <span class="payment-details__value">Creator Tools</span>
+                </div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Amount</span>
+                  <span class="payment-details__value" id="easy-amount">Rs. 0</span>
+                </div>
+              </div>
+
+              <!-- Bank Details -->
+              <div class="payment-details" id="details-bank">
+                <div class="payment-details__title">🏦 Bank Transfer Details</div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Bank Name</span>
+                  <span class="payment-details__value">Meezan Bank</span>
+                </div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Account Number</span>
+                  <span class="payment-details__value">0312-6575447 <button class="copy-btn" onclick="copyText('03126575447')">Copy</button></span>
+                </div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Account Title</span>
+                  <span class="payment-details__value">Creator Tools</span>
+                </div>
+                <div class="payment-details__row">
+                  <span class="payment-details__label">Amount</span>
+                  <span class="payment-details__value" id="bank-amount">Rs. 0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Proof -->
+            <div class="form-section">
+              <h3 class="form-section__title">📋 Payment Confirmation</h3>
+              <div class="form-group">
+                <label for="transactionId">Transaction ID / Reference Number *</label>
+                <input type="text" id="transactionId" placeholder="Enter your transaction ID after sending payment">
+              </div>
+              <div class="form-group">
+                <label for="orderNotes">Additional Notes (optional)</label>
+                <textarea id="orderNotes" placeholder="Any special instructions..."></textarea>
+              </div>
+            </div>
+
+            <button class="checkout__submit" id="placeOrderBtn" onclick="placeOrder()">
+              🔒 Place Order Securely
+            </button>
+          </div>
+
+          <!-- RIGHT: Summary -->
+          <div class="checkout__summary">
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:20px;">📦 Order Summary</h3>
+            <div class="summary__product">
+              <img id="summaryImg" src="" alt="Product">
+              <div>
+                <div class="summary__product-name" id="summaryName">—</div>
+                <div class="summary__product-plan" id="summaryPlan">—</div>
+              </div>
+            </div>
+            <div class="summary__row">
+              <span>Subtotal</span>
+              <span id="summarySubtotal">Rs. 0</span>
+            </div>
+            <div class="summary__row">
+              <span>Delivery</span>
+              <span style="color:#10b981;font-weight:600;">FREE ⚡</span>
+            </div>
+            <div class="summary__row">
+              <span>Service Fee</span>
+              <span>Rs. 0</span>
+            </div>
+            <div class="summary__row summary__row--total">
+              <span>Total</span>
+              <span id="summaryTotal">Rs. 0</span>
+            </div>
+            <div class="summary__trust">
+              <div class="summary__trust-item">✅ Verified Premium Plans</div>
+              <div class="summary__trust-item">⚡ Delivery within 2-4 Hours</div>
+              <div class="summary__trust-item">💬 24/7 WhatsApp Support</div>
+              <div class="summary__trust-item">🔄 Replacement Warranty</div>
+              <div class="summary__trust-item">🔒 Secure & Encrypted</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal">
+      <div class="modal__check">✅</div>
+      <h2 class="modal__title">Order Placed Successfully! 🎉</h2>
+      <div class="modal__order-id" id="modalOrderId">Order #0000</div>
+      <p class="modal__text">Our team will verify your payment and deliver your tool within <strong>2-4 hours</strong>.</p>
+      <p class="modal__text">For faster delivery, contact us on WhatsApp!</p>
+      <div class="modal__btns">
+        <a href="https://wa.me/923126575447?text=Hi! I just placed an order. Please verify my payment." class="modal__btn modal__btn--whatsapp" target="_blank">💬 WhatsApp Support</a>
+        <a href="index.html" class="modal__btn modal__btn--home">🏠 Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <span class="navbar__logo-icon">⚡</span>
+            <span><span class="gradient-text">Creator</span> Tools</span>
+          </a>
+          <p class="footer__desc">Premium digital tools at affordable prices with reliable support and warranty.</p>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/share/18v67h63hg/" target="_blank">📱</a>
+            <a href="#">📷</a>
+            <a href="https://wa.me/923126575447" target="_blank">💬</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Quick Links</h4>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Tools</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Support</h4>
+          <ul class="footer__links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer__col-title">Trust & Safety</h4>
+          <ul class="footer__links">
+            <li>✅ Verified Plans</li>
+            <li>✅ Secure Delivery</li>
+            <li>✅ Warranty Support</li>
+            <li>✅ Fast WhatsApp Help</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 Creator Tools — All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/923126575447" class="whatsapp-btn" target="_blank" aria-label="WhatsApp Support">💬</a>
+
+  <script src="products-data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Get URL params
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+    const productName = params.get('product');
+    const planName = params.get('plan');
+    const price = params.get('price');
+
+    if (!productName || !planName || !price) {
+      window.location.href = 'products.html';
+    }
+
+    // Fill summary
+    document.getElementById('summaryName').textContent = productName;
+    document.getElementById('summaryPlan').textContent = '📋 Plan: ' + planName;
+    document.getElementById('summarySubtotal').textContent = 'Rs. ' + parseInt(price).toLocaleString();
+    document.getElementById('summaryTotal').textContent = 'Rs. ' + parseInt(price).toLocaleString();
+
+    // Fill amounts in payment details
+    document.getElementById('jazz-amount').textContent = 'Rs. ' + parseInt(price).toLocaleString();
+    document.getElementById('easy-amount').textContent = 'Rs. ' + parseInt(price).toLocaleString();
+    document.getElementById('bank-amount').textContent = 'Rs. ' + parseInt(price).toLocaleString();
+
+    // Product image from data
+    if (productId && window.productsData && window.productsData[productId]) {
+      const p = window.productsData[productId];
+      document.getElementById('summaryImg').src = p.logo || '';
+      document.getElementById('summaryImg').alt = p.name;
+    } else {
+      document.getElementById('summaryImg').style.display = 'none';
+    }
+
+    // Auto-fill if logged in
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    if (user) {
+      try {
+        const u = JSON.parse(user);
+        document.getElementById('custName').value = u.name || '';
+        document.getElementById('custEmail').value = u.email || '';
+      } catch(e) {}
+    }
+
+    // Payment selection
+    let selectedMethod = '';
+    function selectPayment(el) {
+      document.querySelectorAll('.payment-card').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('show'));
+      el.classList.add('selected');
+      selectedMethod = el.dataset.method;
+      const details = document.getElementById('details-' + selectedMethod);
+      if (details) details.classList.add('show');
+    }
+
+    // Copy text
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied!';
+        btn.style.background = '#10b981';
+        setTimeout(() => { btn.textContent = 'Copy'; btn.style.background = '#0d9488'; }, 1500);
+      });
+    }
+
+    // Place order
+    function placeOrder() {
+      const name = document.getElementById('custName').value.trim();
+      const email = document.getElementById('custEmail').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const txnId = document.getElementById('transactionId').value.trim();
+      const notes = document.getElementById('orderNotes').value.trim();
+
+      if (!name) { alert('Please enter your name'); return; }
+      if (!email) { alert('Please enter your email'); return; }
+      if (!phone) { alert('Please enter your phone number'); return; }
+      if (!selectedMethod) { alert('Please select a payment method'); return; }
+      if (!txnId) { alert('Please enter your transaction ID'); return; }
+
+      const btn = document.getElementById('placeOrderBtn');
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Processing...';
+
+      const headers = { 'Content-Type': 'application/json' };
+      const authToken = localStorage.getItem('token');
+      if (authToken) headers['Authorization'] = 'Bearer ' + authToken;
+
+      fetch('/api/orders', {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({
+          user_name: name,
+          user_email: email,
+          user_phone: phone,
+          product_name: productName,
+          plan_name: planName,
+          price: parseInt(price),
+          payment_method: selectedMethod,
+          notes: 'TXN: ' + txnId + (notes ? ' | ' + notes : '')
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('modalOrderId').textContent = 'Order #' + String(data.orderId).padStart(4, '0');
+          document.getElementById('successModal').classList.add('show');
+        } else {
+          alert(data.error || 'Failed to place order');
+          btn.disabled = false;
+          btn.innerHTML = '🔒 Place Order Securely';
+        }
+      })
+      .catch(err => {
+        alert('Network error. Please try again.');
+        btn.disabled = false;
+        btn.innerHTML = '🔒 Place Order Securely';
+      });
+    }
+  </script>
+</body>
+</html>

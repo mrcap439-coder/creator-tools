@@ -61,7 +61,7 @@
             </div>
             
             <button class="product-detail__order-btn" id="orderBtn">
-              📭 Order Now via WhatsApp
+              🛒 Buy Now — Checkout
             </button>
             
             <div class="product-detail__features" id="productFeatures">
@@ -201,13 +201,19 @@
         featuresContainer.appendChild(featureDiv);
       });
       
-      // WhatsApp order button
+      // Order Now button - redirect to checkout
       document.getElementById('orderBtn').addEventListener('click', function() {
         const selectedPlan = document.querySelector('.plan-card.selected');
-        const price = selectedPlan ? selectedPlan.getAttribute('data-price') : '';
-        const planName = selectedPlan ? selectedPlan.querySelector('.plan-card__name').textContent : '';
-        const msg = 'Hi! I want to order ' + product.name + ' (' + planName + ') for Rs. ' + price;
-        window.open('https://wa.me/923001234567?text=' + encodeURIComponent(msg), '_blank');
+        if (!selectedPlan) { alert('Please select a plan first!'); return; }
+        const price = selectedPlan.getAttribute('data-price');
+        const planName = selectedPlan.querySelector('.plan-card__name').textContent;
+        const params = new URLSearchParams({
+          id: productId,
+          product: product.name,
+          plan: planName,
+          price: price
+        });
+        window.location.href = 'checkout.html?' + params.toString();
       });
     })();
   </script>
