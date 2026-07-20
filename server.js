@@ -3,7 +3,26 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const fs = require('fs');
+const multer = require('multer');
 const { initDatabase, getOne, getAll, insertUser, insertOrder, updateOrder, deleteOrder, getStats } = require('./database');
+
+// Setup uploads folder
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
+
+// Multer config for screenshot upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadsDir),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    cb(null, 'payment-' + Date.now() + ext);
+  }
+});
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 }, fileFilter: (req, file, cb) => {
+  const allowed = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+  cb(null, allowed.includes(path.extname(file.originalname).toLowerCase()));
+}});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +32,7 @@ const JWT_SECRET = 'creator-tools-secret-key-2026';
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+app.use('/uploads', express.static(uploadsDir));
 
 // Health check
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
@@ -88,7 +108,7 @@ app.get('/api/user', authMiddleware, (req, res) => {
 // ORDER ROUTES
 // ==================
 
-app.post('/api/orders', (req, res) => {
+app.post('/api/orders', upload.single('screenshot'), (req, res) => {
   try {
     const { user_name, user_email, user_phone, product_name, plan_name, price, payment_method, notes } = req.body;
     if (!user_name || !user_email || !product_name || !plan_name || !price) {
@@ -101,11 +121,23 @@ app.post('/api/orders', (req, res) => {
       try { userId = jwt.verify(token, JWT_SECRET).id; } catch(e) {}
     }
     
+    const screenshotPath = req.file ? '/uploads/' + req.file.filename : '';
+    
     const result = insertOrder({
       user_id: userId, user_name, user_email, user_phone: user_phone || '',
-      product_name, plan_name, price, payment_method: payment_method || 'pending',
-      payment_status: 'pending', order_status: 'pending', notes: notes || ''
+      product_name, plan_name, price: parseInt(price), payment_method: payment_method || 'pending',
+      payment_status: 'pending', order_status: 'pending', notes: notes || '',
+      screenshot: screenshotPath
     });
+    
+    // Log order for admin notification
+    console.log('\n🔔 NEW ORDER RECEIVED!');
+    console.log('   Product:', product_name, '-', plan_name);
+    console.log('   Customer:', user_name, '|', user_email, '|', user_phone);
+    console.log('   Amount: Rs.', price);
+    console.log('   Payment:', payment_method);
+    if (screenshotPath) console.log('   Screenshot:', screenshotPath);
+    console.log('');
     
     res.json({ success: true, orderId: result.lastInsertRowid, message: 'Order placed successfully!' });
   } catch (err) {
