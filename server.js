@@ -174,22 +174,20 @@ app.delete('/api/admin/orders/:id', authMiddleware, adminMiddleware, (req, res) 
 async function start() {
   await initDatabase();
   
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     console.log('');
     console.log('========================================');
     console.log('  ⚡ Creator Tools Server is RUNNING!');
     console.log('========================================');
     console.log('');
-    console.log(`  🌐 Website:  http://localhost:${PORT}`);
-    console.log(`  👨‍💼 Admin:    http://localhost:${PORT}/admin.html`);
-    console.log('');
-    console.log('  🔐 Admin Login:');
-    console.log('     Email:    admin@creatortools.com');
-    console.log('     Password: admin123');
+    console.log(`  🌐 Port: ${PORT}`);
     console.log('');
     console.log('========================================');
     console.log('');
   });
 }
 
-start();
+start().catch(err => {
+  console.error('Failed to start server:', err);
+  process.exit(1);
+});
