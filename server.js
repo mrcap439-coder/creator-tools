@@ -6,7 +6,7 @@ const path = require('path');
 const { initDatabase, getOne, getAll, runQuery, getCount } = require('./database');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const JWT_SECRET = 'creator-tools-secret-key-2026';
 
 // Middleware
