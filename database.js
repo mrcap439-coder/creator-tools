@@ -1,113 +1,103 @@
-const initSqlJs = require('sql.js');
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
-const DB_PATH = path.join(__dirname, 'creator-tools.db');
+const DB_PATH = path.join(__dirname, 'data.json');
 
-let db;
+// Default data structure
+const defaultData = {
+  users: [],
+  orders: [],
+  nextUserId: 2,
+  nextOrderId: 1
+};
 
-async function initDatabase() {
-  const SQL = await initSqlJs();
-  
-  // Load existing database or create new one
+let data;
+
+function initDatabase() {
   if (fs.existsSync(DB_PATH)) {
-    const buffer = fs.readFileSync(DB_PATH);
-    db = new SQL.Database(buffer);
+    try {
+      const raw = fs.readFileSync(DB_PATH, 'utf-8');
+      data = JSON.parse(raw);
+    } catch (e) {
+      data = { ...defaultData };
+    }
   } else {
-    db = new SQL.Database();
+    data = { ...defaultData };
   }
 
-  // Create tables
-  db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      email TEXT UNIQUE NOT NULL,
-      phone TEXT,
-      password TEXT NOT NULL,
-      role TEXT DEFAULT 'customer',
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
-
-  db.run(`
-    CREATE TABLE IF NOT EXISTS orders (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id INTEGER,
-      user_name TEXT NOT NULL,
-      user_email TEXT NOT NULL,
-      user_phone TEXT,
-      product_name TEXT NOT NULL,
-      plan_name TEXT NOT NULL,
-      price INTEGER NOT NULL,
-      payment_method TEXT DEFAULT 'pending',
-      payment_status TEXT DEFAULT 'pending',
-      order_status TEXT DEFAULT 'pending',
-      notes TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (user_id) REFERENCES users(id)
-    )
-  `);
-
-  // Create default admin user
-  const adminCheck = db.exec("SELECT id FROM users WHERE email = 'admin@creatortools.com'");
-  if (adminCheck.length === 0 || adminCheck[0].values.length === 0) {
+  // Create default admin user if not exists
+  const adminExists = data.users.find(u => u.email === 'admin@creatortools.com');
+  if (!adminExists) {
     const hashedPassword = bcrypt.hashSync('admin123', 10);
-    db.run(
-      "INSERT INTO users (name, email, phone, password, role) VALUES (?, ?, ?, ?, ?)",
-      ['Admin', 'admin@creatortools.com', '923126575447', hashedPassword, 'admin']
-    );
+    data.users.push({
+      id: 1,
+      name: 'Admin',
+      email: 'admin@creatortools.com',
+      phone: '923126575447',
+      password: hashedPassword,
+      role: 'admin',
+      created_at: new Date().toISOString()
+    });
     saveDatabase();
   }
 
-  console.log('  ✅ Database initialized');
-  return db;
+  console.log('  ✅ Database initialized (' + data.users.length + ' users, ' + data.orders.length + ' orders)');
+  return data;
 }
 
 function saveDatabase() {
-  const data = db.export();
-  const buffer = Buffer.from(data);
-  fs.writeFileSync(DB_PATH, buffer);
+  fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
 }
 
 // Helper functions
-function getOne(sql, params = []) {
-  const stmt = db.prepare(sql);
-  stmt.bind(params);
-  if (stmt.step()) {
-    const row = stmt.getAsObject();
-    stmt.free();
-    return row;
-  }
-  stmt.free();
-  return null;
+function getOne(table, filter) {
+  return data[table].find(filter) || null;
 }
 
-function getAll(sql, params = []) {
-  const stmt = db.prepare(sql);
-  stmt.bind(params);
-  const results = [];
-  while (stmt.step()) {
-    results.push(stmt.getAsObject());
-  }
-  stmt.free();
-  return results;
+function getAll(table, filter) {
+  if (filter) return data[table].filter(filter);
+  return [...data[table]];
 }
 
-function runQuery(sql, params = []) {
-  db.run(sql, params);
+function insertUser(user) {
+  user.id = data.nextUserId++;
+  user.created_at = new Date().toISOString();
+  data.users.push(user);
   saveDatabase();
-  return { lastInsertRowid: db.exec("SELECT last_insert_rowid()")[0].values[0][0] };
+  return { lastInsertRowid: user.id };
 }
 
-function getCount(sql, params = []) {
-  const result = db.exec(sql);
-  if (result.length > 0 && result[0].values.length > 0) {
-    return result[0].values[0][0];
-  }
-  return 0;
+function insertOrder(order) {
+  order.id = data.nextOrderId++;
+  order.created_at = new Date().toISOString();
+  order.updated_at = new Date().toISOString();
+  data.orders.push(order);
+  saveDatabase();
+  return { lastInsertRowid: order.id };
 }
 
-module.exports = { initDatabase, getOne, getAll, runQuery, getCount, saveDatabase };
+function updateOrder(orderId, updates) {
+  const idx = data.orders.findIndex(o => o.id === parseInt(orderId));
+  if (idx === -1) return false;
+  Object.assign(data.orders[idx], updates, { updated_at: new Date().toISOString() });
+  saveDatabase();
+  return true;
+}
+
+function deleteOrder(orderId) {
+  data.orders = data.orders.filter(o => o.id !== parseInt(orderId));
+  saveDatabase();
+  return true;
+}
+
+function getStats() {
+  const totalOrders = data.orders.length;
+  const pendingOrders = data.orders.filter(o => o.order_status === 'pending').length;
+  const completedOrders = data.orders.filter(o => o.order_status === 'completed').length;
+  const totalRevenue = data.orders.filter(o => o.payment_status === 'paid').reduce((sum, o) => sum + (o.price || 0), 0);
+  const totalUsers = data.users.filter(u => u.role === 'customer').length;
+  return { totalOrders, pendingOrders, completedOrders, totalRevenue, totalUsers };
+}
+
+module.exports = { initDatabase, saveDatabase, getOne, getAll, insertUser, insertOrder, updateOrder, deleteOrder, getStats, data: () => data };
